@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Fish Supply</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #555;
+        }
+
+        p {
+            text-align: justify;
+            color: #444;
+            font-size: 13px;
+            padding: 0 20px;
+            margin: 20px 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            margin: 30px auto;
+            width: 90%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            /* Shadow effect for the box */
+        }
+
+        .container-split {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            margin: 30px auto;
+            width: 90%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .half-container {
+            width: 48%;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        #chart,
+        #map,
+        #scatter,
+        #second-chart {
+            display: inline-block;
+            width: 100%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+</head>
+
+<body>
+
+    <!-- Topic Title -->
+    <h1>Sustainable Fish Supply: Balancing Consumption vs. Production</h1>
+
+    <!-- Wide and Short Chart Section -->
+    <div class="container">
+        <h2>Average Animal Protein Consumption</h2>
+        <div id="chart"></div>
+
+        <!-- Introduction Text -->
+        <p>
+            As seen in the chart above, <strong>Fish and Seafood</strong>, represented by the mint green color, make up
+            a significant portion of <strong>animal protein consumption in Malaysia</strong>, surpassing the global
+            average. This highlights the <strong>critical role of fish and seafood in Malaysia's diet</strong>,
+            especially compared to countries like Australia, where <strong>beef and poultry</strong> dominate.
+        </p>
+
+        <p>
+            This sets the stage for key challenges like <strong>overfishing</strong> and the pressure on
+            <strong>aquaculture</strong> to meet demand. In the following sections, we’ll explore how these consumption
+            trends contribute to environmental concerns, particularly the <strong>unsustainable rise of
+                aquaculture</strong>.
+        </p>
+    </div>
+
+    <!-- Second Row with Split Box -->
+    <div class="container-split">
+        <div class="half-container">
+            <h2>Production vs. Consumption with Overfishing Size</h2>
+            <div id="scatter"></div>
+        </div>
+        <div class="half-container">
+            <h2>Production from Fisheries & Aquaculture</h2>
+            <div id="second-chart"></div>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="container">
+        <h2>Global Overfishing per Capita in 2020 (kg)</h2>
+        <div id="map"></div>
+    </div>
+
+    <script>
+        // Embed the wide and short chart
+        const chartSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 900,
+            "height": 100,
+            "data": {
+                "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/pre-processed_data/combined_average_by_entity.csv"
+            },
+            "encoding": {
+                "x": {
+                    "field": "Average (%)",
+                    "type": "quantitative",
+                    "title": "Average (%)"
+                },
+                "y": {
+                    "field": "Entity",
+                    "type": "nominal",
+                    "title": "Entity",
+                    "sort": ["Malaysia", "World", "Australia"]
+                },
+                "color": {
+                    "field": "Type of Protein",
+                    "type": "nominal",
+                    "title": "Type of Protein",
+                    "scale": {
+                        "scheme": "tableau10"
+                    }
+                },
+                "tooltip": [
+                    { "field": "Entity", "type": "nominal", "title": "Entity" },
+                    { "field": "Type of Protein", "type": "nominal", "title": "Type of Protein" },
+                    { "field": "Average (%)", "type": "quantitative", "title": "Average (%)", "format": ".1f" }
+                ]
+            },
+            "layer": [
+                {
+                    "mark": {
+                        "type": "bar"
+                    }
+                }
+            ]
+        };
+        vegaEmbed("#chart", chartSpec).then(console.log).catch(console.warn);
+
+        // Embed the map visualization
+        const mapSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 900,
+            "height": 400,
+            "data": {
+                "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/js/ne_110m_admin_0_countries.topojson",
+                "format": { "type": "topojson", "feature": "ne_110m_admin_0_countries" }
+            },
+            "projection": { "type": "equalEarth" },
+            "layer": [
+                {
+                    "transform": [
+                        {
+                            "calculate": "'No data available for ' + datum.properties.NAME",
+                            "as": "note"
+                        }
+                    ],
+                    "mark": { "type": "geoshape", "fill": "lightgray", "stroke": "white" },
+                    "encoding": {
+                        "tooltip": { "field": "note" }
+                    }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/js/oceans.json",
+                        "format": { "type": "topojson", "feature": "oceans" }
+                    },
+                    "mark": { "type": "geoshape", "fill": "#cfe2f3" }
+                },
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/js/WorldMapWithGraticules.json",
+                        "format": { "type": "topojson", "feature": "ne_110m_graticules_30" }
+                    },
+                    "mark": { "type": "geoshape", "fill": null, "stroke": "lightgray" }
+                },
+                {
+                    "transform": [
+                        {
+                            "lookup": "properties.NAME",
+                            "from": {
+                                "data": {
+                                    "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/pre-processed_data/overfishinper_capita_in_2020.csv",
+                                    "format": { "type": "csv" }
+                                },
+                                "key": "Entity",
+                                "fields": ["overfishing_per_capita_kg"]
+                            }
+                        },
+                        {
+                            "calculate": "datum['overfishing_per_capita_kg'] * 1",
+                            "as": "Overfishing per Capita (kg)"
+                        }
+                    ],
+                    "mark": { "type": "geoshape", "stroke": "white" },
+                    "encoding": {
+                        "color": {
+                            "field": "Overfishing per Capita (kg)",
+                            "type": "quantitative",
+                            "title": "Overfishing per Capita (kg)",
+                            "scale": {
+                                "type": "threshold",
+                                "domain": [-3, 1, 5, 10],
+                                "range": ["#f7d9c4", "#f4a582", "#d6604d", "#b2182b", "#67001f"]
+                            },
+                            "legend": {
+                                "orient": "left",
+                                "offset": -40
+                            }
+                        },
+                        "tooltip": [
+                            { "field": "properties.NAME", "type": "nominal", "title": "Country" },
+                            { "field": "Overfishing per Capita (kg)", "type": "quantitative", "title": "Overfishing per Capita (kg)", "format": ".2f" }
+                        ]
+                    }
+                }
+            ],
+            "config": {}
+        };
+        vegaEmbed("#map", mapSpec).then(console.log).catch(console.warn);
+
+        // Embed the scatter plot
+        const scatterSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 370,
+            "height": 300,
+            "data": {
+                "url": "https://raw.githubusercontent.com/ParkDarin/Homework10/main/data/overfishing_per_capita.csv"
+            },
+            "params": [
+                {
+                    "name": "Country_selection",
+                    "value": ["Malaysia", "Australia", "World"],
+                    "bind": {
+                        "input": "select",
+                        "options": [
+                            "Afghanistan", "Albania", "Algeria", "Angola", "Antigua and Barbuda",
+                            "Argentina", "Armenia", "Austria", "Azerbaijan", "Bahamas",
+                            "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize",
+                            "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina",
+                            "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
+                            "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic",
+                            "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica",
+                            "Côte d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czechia", "Democratic Republic of the Congo",
+                            "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador",
+                            "Egypt", "El Salvador", "Estonia", "eSwatini", "Ethiopia", "Fiji", "Finland", "France",
+                            "French Polynesia", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada",
+                            "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "High-income countries",
+                            "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq",
+                            "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya",
+                            "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia",
+                            "Libya", "Lithuania", "Low-income countries", "Lower-middle-income countries",
+                            "Luxembourg", "Macao", "Madagascar", "Malawi", "Maldives", "Mali", "Malta",
+                            "Mauritania", "Mauritius", "Mexico", "Micronesia (country)", "Moldova", "Mongolia",
+                            "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands",
+                            "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea",
+                            "North Macedonia", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay",
+                            "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda",
+                            "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa",
+                            "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
+                            "Slovakia", "Slovenia", "Solomon Islands", "South Africa", "South Korea", "South Sudan",
+                            "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan",
+                            "Tajikistan", "Tanzania", "Thailand", "Togo", "Trinidad and Tobago", "Tunisia", "Turkey",
+                            "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America",
+                            "Upper-middle-income countries", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam",
+                            "Yemen", "Zambia", "Zimbabwe"
+                        ],
+                        "name": "Select Additional Country: "
+                    }
+                }
+            ],
+            "transform": [
+                {
+                    "filter": "datum.Entity == 'Malaysia' || datum.Entity == 'Australia' || datum.Entity == 'World' || indexof(Country_selection, datum.Entity) >= 0"
+                }
+            ],
+            "mark": "circle",
+            "encoding": {
+                "x": {
+                    "field": "consumption_per_capita_kg",
+                    "type": "quantitative",
+                    "title": "Consumption per Capita (kg)"
+                },
+                "y": {
+                    "field": "production_per_capita_kg",
+                    "type": "quantitative",
+                    "title": "Production per Capita (kg)"
+                },
+                "size": {
+                    "field": "overfishing_per_capita_kg",
+                    "type": "quantitative",
+                    "title": "Overfishing per Capita (kg)"
+                },
+                "color": {
+                    "field": "Entity",
+                    "type": "nominal",
+                    "title": "Country"
+                },
+                "tooltip": [
+                    { "field": "Entity", "type": "nominal" },
+                    { "field": "consumption_per_capita_kg", "type": "quantitative", "title": "Consumption" },
+                    { "field": "production_per_capita_kg", "type": "quantitative", "title": "Production" },
+                    { "field": "overfishing_per_capita_kg", "type": "quantitative", "title": "Overfishing" }
+                ]
+            }
+        };
+        vegaEmbed("#scatter", scatterSpec).then(console.log).catch(console.warn);
+
+        const secondChartSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 370,
+            "height": 300,
+            "data": {
+                "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/pre-processed_data/consumption_production.csv"
+            },
+            "params": [
+                {
+                    "name": "Country_selection",
+                    "value": "Malaysia",
+                    "bind": {
+                        "input": "select",
+                        "options": ["Malaysia", "World", "Australia"],
+                        "name": "Select Country: "
+                    }
+                }
+            ],
+            "transform": [
+                { "filter": "datum.Entity === Country_selection" },
+                { "filter": "datum.Year >= 2000 && datum.Year <= 2020" },
+                {
+                    "fold": ["Aquaculture_production_per_capita_kg", "Fisheries_production_per_capita_kg"],
+                    "as": ["Production_Type", "Kg_per_capita"]
+                }
+            ],
+            "layer": [
+                {
+                    "mark": "bar",
+                    "encoding": {
+                        "x": { "field": "Year", "type": "ordinal", "title": "Year" },
+                        "y": {
+                            "field": "Kg_per_capita",
+                            "type": "quantitative",
+                            "title": "Kg per Capita"
+                        },
+                        "color": {
+                            "field": "Production_Type",
+                            "type": "nominal",
+                            "title": "Production Type",
+                            "scale": {
+                                "domain": ["Aquaculture_production_per_capita_kg", "Fisheries_production_per_capita_kg"],
+                                "range": ["#E57373", "#edce7e"]
+                            }
+                        },
+                        "tooltip": [
+                            { "field": "Year", "type": "ordinal" },
+                            { "field": "Production_Type", "type": "nominal", "title": "Production Type" },
+                            { "field": "Kg_per_capita", "type": "quantitative", "title": "Kg Per Capita", "format": ".2f" }
+                        ]
+                    }
+                },
+                {
+                    "mark": { "type": "line", "color": "#5581fa", "point": { "filled": true, "fill": "#5581fa" } },
+                    "encoding": {
+                        "x": { "field": "Year", "type": "ordinal" },
+                        "y": {
+                            "field": "consumption_per_capita_kg",
+                            "type": "quantitative",
+                            "title": "Kg per Capita (Consumption)"
+                        },
+                        "color": {
+                            "value": "#5581fa",
+                            "legend": { "title": "Type", "values": ["Consumption", "Production"] }
+                        },
+                        "tooltip": [
+                            { "field": "Year", "type": "ordinal" },
+                            { "field": "consumption_per_capita_kg", "type": "quantitative", "title": "Consumption (kg per capita)", "format": ".2f" }
+                        ]
+                    }
+                }
+            ]
+        };
+        vegaEmbed("#second-chart", secondChartSpec).then(console.log).catch(console.warn);
+
+    </script>
+</body>
+
+</html>
