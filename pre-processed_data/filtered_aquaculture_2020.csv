@@ -1,0 +1,197 @@
+Entity,Code,Year,Aquaculture_production
+Afghanistan,AFG,2020,9444.0
+Albania,ALB,2020,9084.0
+Algeria,DZA,2020,5435.99
+American Samoa,ASM,2020,20.0
+Angola,AGO,2020,2062.0
+Antigua and Barbuda,ATG,2020,20.0
+Argentina,ARG,2020,2084.5
+Armenia,ARM,2020,18350.0
+Aruba,ABW,2020,1.5
+Australia,AUS,2020,102674.89
+Austria,AUT,2020,4541.91
+Azerbaijan,AZE,2020,533.0
+Bahamas,BHS,2020,6.0
+Bahrain,BHR,2020,15.5
+Bangladesh,BGD,2020,2583866.0
+Barbados,BRB,2020,25.5
+Belarus,BLR,2020,9266.33
+Belgium,BEL,2020,209.0
+Belize,BLZ,2020,555.0
+Benin,BEN,2020,3136.91
+Bhutan,BTN,2020,181.0
+Bolivia,BOL,2020,3720.0
+Bosnia and Herzegovina,BIH,2020,3775.8
+Botswana,BWA,2020,146.0
+Brazil,BRA,2020,630500.2
+British Virgin Islands,VGB,2020,1.0
+Brunei,BRN,2020,3500.03
+Bulgaria,BGR,2020,15051.79
+Burkina Faso,BFA,2020,647.0
+Burundi,BDI,2020,1450.0
+Cambodia,KHM,2020,400400.0
+Cameroon,CMR,2020,8500.0
+Canada,CAN,2020,171007.0
+Cape Verde,CPV,2020,22.0
+Cayman Islands,CYM,2020,10.0
+Central African Republic,CAF,2020,209.0
+Chad,TCD,2020,105.0
+Channel Islands,OWID_CIS,2020,1107.37
+Chile,CHL,2020,1505486.0
+China,CHN,2020,70483540.0
+Colombia,COL,2020,179350.98
+Congo,COG,2020,900.0
+Costa Rica,CRI,2020,16268.95
+Cote d'Ivoire,CIV,2020,5420.0
+Croatia,HRV,2020,21718.27
+Cuba,CUB,2020,25910.0
+Curacao,CUW,2020,0.0
+Cyprus,CYP,2020,7342.6
+Czechia,CZE,2020,20401.0
+Democratic Republic of Congo,COD,2020,4690.0
+Denmark,DNK,2020,42629.0
+Dominica,DMA,2020,0.1
+Dominican Republic,DOM,2020,2680.0
+East Timor,TLS,2020,1060.0
+Ecuador,ECU,2020,774528.94
+Egypt,EGY,2020,1591896.0
+El Salvador,SLV,2020,8378.0
+Equatorial Guinea,GNQ,2020,15.0
+Eritrea,ERI,2020,4.0
+Estonia,EST,2020,1090.15
+Eswatini,SWZ,2020,100.0
+Ethiopia,ETH,2020,534.0
+Fiji,FJI,2020,322.3
+Finland,FIN,2020,15052.9
+France,FRA,2020,191050.44
+French Polynesia,PYF,2020,1468.99
+Gabon,GAB,2020,65.0
+Gambia,GMB,2020,33.0
+Georgia,GEO,2020,2026.9
+Germany,DEU,2020,32258.0
+Ghana,GHA,2020,64010.0
+Greece,GRC,2020,131737.19
+Grenada,GRD,2020,22.5
+Guam,GUM,2020,118.0
+Guatemala,GTM,2020,33651.0
+Guinea,GIN,2020,1135.0
+Guinea-Bissau,GNB,2020,10.0
+Guyana,GUY,2020,137.63
+Haiti,HTI,2020,1560.0
+Honduras,HND,2020,71151.1
+Hong Kong,HKG,2020,3834.7
+Hungary,HUN,2020,18373.33
+Iceland,ISL,2020,40595.06
+India,IND,2020,8641286.0
+Indonesia,IDN,2020,14845014.0
+Iran,IRN,2020,480500.0
+Iraq,IRQ,2020,22704.0
+Ireland,IRL,2020,37750.7
+Israel,ISR,2020,15280.0
+Italy,ITA,2020,125790.26
+Jamaica,JAM,2020,922.55
+Japan,JPN,2020,998938.8
+Jordan,JOR,2020,2055.0
+Kazakhstan,KAZ,2020,6804.56
+Kenya,KEN,2020,20831.0
+Kiribati,KIR,2020,2.0
+Kuwait,KWT,2020,450.0
+Kyrgyzstan,KGZ,2020,5100.0
+Laos,LAO,2020,130020.0
+Latvia,LVA,2020,717.45
+Lebanon,LBN,2020,828.0
+Lesotho,LSO,2020,2601.0
+Liberia,LBR,2020,255.0
+Libya,LBY,2020,10.0
+Lithuania,LTU,2020,4480.45
+Madagascar,MDG,2020,13550.45
+Malawi,MWI,2020,9393.0
+Malaysia,MYS,2020,400017.0
+Mali,MLI,2020,7686.0
+Malta,MLT,2020,19829.53
+Marshall Islands,MHL,2020,9.66
+Mauritius,MUS,2020,3298.0
+Mexico,MEX,2020,278693.8
+Micronesia (country),FSM,2020,0.0
+Moldova,MDA,2020,12600.0
+Montenegro,MNE,2020,885.0
+Morocco,MAR,2020,1618.0
+Mozambique,MOZ,2020,3162.0
+Myanmar,MMR,2020,1145018.0
+Namibia,NAM,2020,320.72
+Nauru,NRU,2020,0.5
+Nepal,NPL,2020,76822.0
+Netherlands,NLD,2020,39940.0
+New Caledonia,NCL,2020,1477.88
+New Zealand,NZL,2020,118582.0
+Nicaragua,NIC,2020,29489.0
+Niger,NER,2020,649.0
+Nigeria,NGA,2020,261710.73
+North Korea,PRK,2020,680300.0
+North Macedonia,MKD,2020,1633.91
+Northern Mariana Islands,MNP,2020,41.0
+Norway,NOR,2020,1490412.0
+Oman,OMN,2020,1307.0
+Pakistan,PAK,2020,162462.0
+Palau,PLW,2020,22.0
+Palestine,PSE,2020,600.0
+Panama,PAN,2020,3909.1
+Papua New Guinea,PNG,2020,6102.0
+Paraguay,PRY,2020,14100.0
+Peru,PER,2020,143829.72
+Philippines,PHL,2020,2322831.5
+Poland,POL,2020,47700.0
+Portugal,PRT,2020,20583.01
+Puerto Rico,PRI,2020,18.0
+Qatar,QAT,2020,22.8
+Romania,ROU,2020,12200.0
+Russia,RUS,2020,291194.0
+Rwanda,RWA,2020,7058.6
+Saint Kitts and Nevis,KNA,2020,2.0
+Saint Lucia,LCA,2020,91.89
+Saint Vincent and the Grenadines,VCT,2020,13.07
+Samoa,WSM,2020,10.01
+Saudi Arabia,SAU,2020,99906.61
+Senegal,SEN,2020,1100.0
+Serbia,SRB,2020,6010.26
+Seychelles,SYC,2020,0.0
+Sierra Leone,SLE,2020,115.0
+Singapore,SGP,2020,4828.85
+Slovakia,SVK,2020,2296.0
+Slovenia,SVN,2020,1672.6
+Solomon Islands,SLB,2020,5504.0
+South Africa,ZAF,2020,9753.01
+South Korea,KOR,2020,2334232.2
+South Sudan,SSD,2020,40.0
+Spain,ESP,2020,276626.84
+Sri Lanka,LKA,2020,42118.9
+Sudan,SDN,2020,9850.0
+Suriname,SUR,2020,37.0
+Sweden,SWE,2020,12090.3
+Switzerland,CHE,2020,2358.1
+Syria,SYR,2020,2300.0
+Tajikistan,TJK,2020,775.0
+Tanzania,TZA,2020,108569.16
+Thailand,THA,2020,1012650.0
+Togo,TGO,2020,730.0
+Tonga,TON,2020,105.2
+Trinidad and Tobago,TTO,2020,4.2
+Tunisia,TUN,2020,23486.1
+Turkey,TUR,2020,421411.0
+Turkmenistan,TKM,2020,150.0
+Turks and Caicos Islands,TCA,2020,0.0
+Tuvalu,TUV,2020,1.0
+Uganda,UGA,2020,123897.0
+Ukraine,UKR,2020,18567.8
+United Arab Emirates,ARE,2020,3047.78
+United Kingdom,GBR,2020,216838.2
+United States,USA,2020,448534.62
+United States Virgin Islands,VIR,2020,8.0
+Uruguay,URY,2020,103.0
+Uzbekistan,UZB,2020,98003.0
+Vanuatu,VUT,2020,3.08
+Venezuela,VEN,2020,40261.0
+Vietnam,VNM,2020,4681435.0
+Yemen,YEM,2020,10.0
+Zambia,ZMB,2020,45670.0
+Zimbabwe,ZWE,2020,21276.34
