@@ -7,7 +7,7 @@
   },
   "title": {
     "text": "Average Animal Protein Consumption",
-    "fontSize": 18,
+    "fontSize": 22,
     "fontWeight": "bold",
     "anchor": "start",
     "color": "#333",
