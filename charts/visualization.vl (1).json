@@ -14,12 +14,13 @@
       "bind": {
         "input": "select",
         "options": ["China", "India", "Indonesia", "Malaysia", "World"],
-        "name": "Select Country: "
+        "name": "Select Country: ",
+        
       }
     },
     {
       "name": "year_selection",
-      "value": 2020,
+      "value": 2000,
       "bind": {
         "input": "range",
         "min": 2000,
@@ -34,10 +35,7 @@
       "filter": "datum.Entity == country_selection && datum.Year == year_selection"
     },
     {
-      "fold": [
-        "Aquaculture production (metric tons)",
-        "Capture fisheries production (metric tons)"
-      ],
+      "fold": ["Aquaculture production (metric tons)", "Capture fisheries production (metric tons)"],
       "as": ["Production_Type", "Percentage"]
     },
     {
@@ -53,13 +51,24 @@
       "type": "nominal",
       "scale": {
         "domain": ["Aquaculture", "Fisheries"],
-        "range": ["#f94449", "#9a784a"]
+        "range": ["#023E8A", "#FFDD89"]
       },
-      "legend": {"orient": "right", "title": null}
+      "legend": {
+        "orient": "right",
+        "title": null
+      }
     },
     "tooltip": [
-      {"field": "Entity", "type": "nominal", "title": "Country"},
-      {"field": "Year", "type": "ordinal", "title": "Year"},
+      {
+        "field": "Entity",
+        "type": "nominal",
+        "title": "Country"
+      },
+      {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year"
+      },
       {
         "field": "Renamed_Production_Type",
         "type": "nominal",
@@ -72,6 +81,5 @@
         "title": "Production (metric tons)"
       }
     ]
-  },
-  "config": {}
+  }
 }
