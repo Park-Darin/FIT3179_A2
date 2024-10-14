@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 150,
-  "height": 120,
+  "width": 160,
+  "height": 130,
   "title": {"text": "Aquaculture vs Fisheries Production"},
   "data": {
     "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/pre-processed_data/production_type.csv",
