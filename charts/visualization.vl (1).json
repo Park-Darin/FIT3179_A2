@@ -45,7 +45,7 @@
       "as": "Renamed_Production_Type"
     }
   ],
-  "mark": {"type": "arc", "innerRadius": 40},
+  "mark": {"type": "arc"},
   "encoding": {
     "theta": {"field": "Percentage", "type": "quantitative"},
     "color": {
