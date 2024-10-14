@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 1100,
+  "width": 1200,
   "height": 350,
   "title": {
     "text": "The Growth of Aquaculture Driven by China's Demand (Values per Capita)",
