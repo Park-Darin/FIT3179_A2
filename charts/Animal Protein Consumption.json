@@ -5,14 +5,6 @@
   "data": {
     "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/pre-processed_data/combined_average_by_entity.csv"
   },
-  "title": {
-    "text": "Average Animal Protein Consumption",
-    "fontSize": 22,
-    "fontWeight": "bold",
-    "anchor": "start",
-    "color": "#333",
-    "dy": -10   
-  },
   "layer": [
     {
       "params": [
