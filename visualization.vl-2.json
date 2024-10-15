@@ -1,0 +1,164 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1100,
+  "height": 350,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/pre-processed_data/consumption_production_filtered.csv",
+    "format": {"type": "csv"}
+  },
+  "params": [{"name": "country_selection", "value": "World"}],
+  "transform": [
+    {"filter": "datum.Entity == country_selection"},
+    {"filter": "datum.Year >= 1994 && datum.Year <= 2020"},
+    {
+      "fold": [
+        "Fisheries_production_per_capita_kg",
+        "consumption_per_capita_kg"
+      ],
+      "as": ["Type", "Kg_per_capita"]
+    },
+    {
+      "calculate": "datum.Type == 'Fisheries_production_per_capita_kg' ? 'Fisheries Production' : 'Consumption'",
+      "as": "Renamed_Type"
+    }
+  ],
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hover_selection",
+          "select": {
+            "type": "point",
+            "fields": ["Renamed_Type"],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": "bar",
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal", "axis": {"title": "Year"}},
+        "xOffset": {"field": "Renamed_Type"},
+        "y": {
+          "field": "Kg_per_capita",
+          "type": "quantitative",
+          "axis": {"title": "Per Capita (Kg)"}
+        },
+        "color": {
+          "field": "Renamed_Type",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Fisheries Production", "Consumption"],
+            "range": ["#023E8A", "#f7aa57"]
+          },
+          "legend": {"title": null, "orient": "top"}
+        },
+        "opacity": {
+          "condition": {"param": "hover_selection", "value": 1},
+          "value": 0.6
+        },
+        "tooltip": [
+          {"field": "Year", "type": "ordinal", "title": "Year"},
+          {"field": "Renamed_Type", "type": "nominal", "title": "Type"},
+          {
+            "field": "Kg_per_capita",
+            "type": "quantitative",
+            "title": "Per Capita (Kg)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dx": 9,
+        "dy": -5,
+        "align": "center",
+        "fontSize": 7
+      },
+      "transform": [{"filter": "datum.Renamed_Type == 'Fisheries Production'"}],
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "xOffset": {"field": "Renamed_Type"}
+        },
+        "y": {
+          "field": "Kg_per_capita",
+          "type": "quantitative",
+          "aggregate": "sum"
+        },
+        "text": {
+          "field": "Kg_per_capita",
+          "type": "quantitative",
+          "format": ".2f"
+        },
+        "color": {"value": "black"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dx": -10,
+        "dy": -5,
+        "align": "center",
+        "fontSize": 7
+      },
+      "transform": [{"filter": "datum.Renamed_Type == 'Consumption'"}],
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "xOffset": {"field": "Renamed_Type"}
+        },
+        "y": {
+          "field": "Kg_per_capita",
+          "type": "quantitative",
+          "aggregate": "sum"
+        },
+        "text": {
+          "field": "Kg_per_capita",
+          "type": "quantitative",
+          "format": ".2f"
+        },
+        "color": {"value": "black"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 13.5,
+        "fontWeight": 300,
+        "font": "sans-serif",
+        "dx": 6,
+        "dy": 5
+      },
+      "encoding": {
+        "text": {"value": "From 1998 onwards, capture fisheries production"},
+        "x": {"value": 130},
+        "y": {"value": 35},
+        "color": {"value": "black"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 13.5,
+        "fontWeight": 300,
+        "font": "sans-serif",
+        "dx": 6,
+        "dy": 5
+      },
+      "encoding": {
+        "text": {"value": "can no longer meet consumption demands."},
+        "x": {"value": 140},
+        "y": {"value": 50},
+        "color": {"value": "black"}
+      }
+    }
+  ],
+  "config": {}
+}
