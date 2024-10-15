@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 550,
+  "height": 350,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/refs/heads/main/pre-processed_data/production_type.csv",
+    "format": {"type": "csv"}
+  },
+  "params": [
+    {
+      "name": "country_selection",
+      "value": "China",
+      "bind": {
+        "input": "select",
+        "options": ["China", "India", "Indonesia", "Malaysia", "World"],
+        "name": "Select Country: "
+      }
+    },
+    {
+      "name": "year_selection",
+      "value": 2000,
+      "bind": {
+        "input": "range",
+        "min": 2000,
+        "max": 2020,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.Entity == country_selection && datum.Year == year_selection"
+    },
+    {
+      "fold": [
+        "Aquaculture production (metric tons)",
+        "Capture fisheries production (metric tons)"
+      ],
+      "as": ["Production_Type", "Percentage"]
+    },
+    {
+      "calculate": "datum.Production_Type == 'Aquaculture production (metric tons)' ? 'Aquaculture' : 'Fisheries'",
+      "as": "Renamed_Production_Type"
+    }
+  ],
+  "mark": {"type": "arc", "innerRadius": 100},
+  "encoding": {
+    "theta": {"field": "Percentage", "type": "quantitative"},
+    "color": {
+      "field": "Renamed_Production_Type",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Aquaculture", "Fisheries"],
+        "range": ["#023E8A", "#FFDD89"]
+      },
+      "legend": {"orient": "right", "title": "Production Method"}
+    },
+    "tooltip": [
+      {"field": "Entity", "type": "nominal", "title": "Country"},
+      {"field": "Year", "type": "ordinal", "title": "Year"},
+      {
+        "field": "Renamed_Production_Type",
+        "type": "nominal",
+        "title": "Production Methods"
+      },
+      {
+        "field": "Percentage",
+        "type": "quantitative",
+        "format": ".0f",
+        "title": "Production (metric tons)"
+      }
+    ]
+  },
+  "config": {}
+}
