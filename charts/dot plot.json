@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1100,
+  "height": 450,
+  "description": "A ranged dot plot showing consumption per capita for selected countries (1998-2020).",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Park-Darin/FIT3179_A2/main/pre-processed_data/overfishing_per_capita_1994.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "filter": {
+        "field": "Entity",
+        "oneOf": [
+          "World",
+          "Malaysia",
+          "Canada",
+          "China",
+          "Indonesia",
+          "India",
+          "Bangladesh",
+          "Iran",
+          "Brazil",
+          "United Kingdom",
+          "Turkey"
+        ]
+      }
+    },
+    {"fold": ["1998", "2020"], "as": ["Year", "Consumption_per_capita"]},
+    {"calculate": "datum.Entity + ', ' + datum.Year", "as": "Countrytooltip"},
+    {
+      "calculate": "format(datum.Consumption_per_capita, '.3f') + ' kg per capita'",
+      "as": "Consumptiontooltip"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Consumption_per_capita",
+      "type": "quantitative",
+      "title": "Overfishing (kg per person)"
+    },
+    "y": {
+      "field": "Entity",
+      "type": "nominal",
+      "title": "",
+      "sort": {"op": "max", "field": "Consumption_per_capita"},
+      "axis": {"offset": 5, "ticks": false, "minExtent": 70, "domain": false}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "line", "size": 10},
+      "encoding": {
+        "detail": {"field": "Entity", "type": "nominal"},
+        "color": {"value": "#eaeaea"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true},
+      "encoding": {
+        "color": {
+          "field": "Year",
+          "type": "nominal",
+          "scale": {
+            "domain": ["1998", "2020"],
+            "range": ["#023E8A", "#C30010"]
+          },
+          "legend": {"title": "Year", "orient": "bottom"}
+        },
+        "size": {"value": 100},
+        "opacity": {"value": 1},
+        "stroke": {"value": "black"},
+        "strokeWidth": {"value": 1.5},
+        "tooltip": [
+          {"field": "Countrytooltip", "type": "nominal", "title": "Location"},
+          {"field": "Consumptiontooltip", "title": "Overfishing"}
+        ]
+      }
+    }
+  ],
+  "config": {
+    "axis": {
+      "labelFont": "sans-serif",
+      "labelFontSize": 12,
+      "titleFont": "sans-serif",
+      "titleFontSize": 13.5,
+      "titleFontWeight": 900,
+      "labelColor": "black",
+      "titleColor": "black"
+    },
+    "legend": {
+      "labelFont": "sans-serif",
+      "labelFontSize": 12,
+      "titleFont": "sans-serif",
+      "titleFontSize": 13.5,
+      "titleFontWeight": 300,
+      "labelColor": "black",
+      "titleColor": "black"
+    },
+    "text": {
+      "font": "sans-serif",
+      "fontSize": 13.5,
+      "fontWeight": 300,
+      "color": "black"
+    }
+  }
+}
